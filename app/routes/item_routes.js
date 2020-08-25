@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 
 // pull in Mongoose model for s
-const Item = require('../models/item-routes')
+const Item = require('../models/item')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -30,7 +30,7 @@ const router = express.Router()
 // INDEX
 // GET /s
 router.get('/items', requireToken, (req, res, next) => {
-  Item.find({owner:req.user.id})
+  Item.find({owner: req.user.id})
     .then(items => {
       // `s` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -98,7 +98,7 @@ router.patch('/items/:id', requireToken, removeBlanks, (req, res, next) => {
 // DESTROY
 // DELETE /s/5a7db6c74d55bc51bdf39793
 router.delete('/items/:id', requireToken, (req, res, next) => {
-  .findById(req.params.id)
+  Item.findById(req.params.id)
     .then(handle404)
     .then(item => {
       // throw an error if current user doesn't own ``
