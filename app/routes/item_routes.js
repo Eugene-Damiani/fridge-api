@@ -75,7 +75,6 @@ router.post('/items', requireToken, (req, res, next) => {
     })
   // respond to successful `create` with status 201 and JSON of new ""
     .then(item => {
-      console.log(item)
       res.status(201).json({ item: item.toObject() })
     })
     // if an error occurs, pass it off to our error handler
