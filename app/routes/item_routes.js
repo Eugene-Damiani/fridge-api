@@ -61,9 +61,21 @@ router.post('/items', requireToken, (req, res, next) => {
   // set owner of new  to be current user
   req.body.item.owner = req.user.id
 
-  Item.create(req.body.item)
-    // respond to succesful `create` with status 201 and JSON of new ""
+  // make get 'GET' request first to see if item already exists
+  Item.find({ owner: req.user.id, name: req.body.item.name }).limit(1)
+    .then(checkItemExist => {
+      // if length === 1, that item exists in database
+      if (checkItemExist.length === 1) {
+        // so update that item:
+        return Item.findOneAndUpdate({name: req.body.item.name}, req.body.item, {new: true})
+      } else {
+        // item doesn't exist in database, so create/add item to inventory:
+        return Item.create(req.body.item)
+      }
+    })
+  // respond to successful `create` with status 201 and JSON of new ""
     .then(item => {
+      console.log(item)
       res.status(201).json({ item: item.toObject() })
     })
     // if an error occurs, pass it off to our error handler
