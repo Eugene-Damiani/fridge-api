@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl "http://localhost:4741/items/${ID}"\
+curl "https://stark-falls-98169.herokuapp.com/items/${ID}"\
   --include \
   --request PATCH \
   --header "Content-Type: application/json" \

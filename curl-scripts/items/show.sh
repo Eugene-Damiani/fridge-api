@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl "http://localhost:4741/items/${ID}" \
+curl "https://stark-falls-98169.herokuapp.com/items/${ID}" \
   --include \
   --request GET \
   --header "Authorization: Bearer ${TOKEN}"
