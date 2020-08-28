@@ -6,11 +6,13 @@ const itemSchema = new mongoose.Schema({
     required: true
   },
   quantity: {
-    type: String,
+    type: Number,
+    min: 0,
     required: true
   },
   price: {
     type: Number,
+    min: 0,
     required: true
   },
   owner: {
