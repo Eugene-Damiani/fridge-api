@@ -39,6 +39,13 @@ In future iterations, we'd like to ...
 
 ### Catalog of Routes
 
+Verb         |	URI Pattern
+------------ | -------------
+GET | /items
+GET | /items/:id
+POST | /item-create
+PATCH | /items/:id/edit
+DELETE | /items/:id
 
 ## Images
 
