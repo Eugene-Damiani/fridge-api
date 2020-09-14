@@ -1,9 +1,6 @@
 #!/bin/bash
 
-API="https://stark-falls-98169.herokuapp.com"
-URL_PATH="/sign-out"
-
-curl "${API}${URL_PATH}/" \
+curl "http://localhost:4741/businesses/${ID}" \
   --include \
   --request DELETE \
   --header "Authorization: Bearer ${TOKEN}"
