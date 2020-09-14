@@ -4,13 +4,12 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage })
 const Upload = require('../models/upload')
 const router = express.Router()
-// const passport = require('passport')
-// const requireToken = passport.authenticate('bearer', { session: false })
-
+const passport = require('passport')
+const requireToken = passport.authenticate('bearer', { session: false })
 const s3Upload = require('../../lib/s3_upload')
 
-router.post('/uploads', upload.single('upload'), (req, res, next) => {
-  // req.body.upload.owner = req.user.id
+router.post('/uploads', requireToken, upload.single('upload'), (req, res, next) => {
+  req.body.upload.owner = req.user.id
   console.log(req.file)
   s3Upload(req.file)
     .then(awsFile => {
@@ -25,7 +24,7 @@ router.post('/uploads', upload.single('upload'), (req, res, next) => {
 
 // SHOW
 // GET /s/5a7db6c74d55bc51bdf39793
-router.get('/uploads/:id', (req, res, next) => {
+router.get('/uploads/:id', requireToken, (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Upload.findById(req.params.id)
     // if `findById` is succesful, respond with 200 and "" JSON
@@ -34,9 +33,9 @@ router.get('/uploads/:id', (req, res, next) => {
     .catch(next)
 })
 
-// Index
-router.get('/uploads/', (req, res, next) => {
-  Upload.find(req.params.id)
+// INDEX
+router.get('/uploads/', requireToken, (req, res, next) => {
+  Upload.find({owner: req.user.id})
     .then(uploads => {
       return uploads.map(upload => upload.toObject())
     })

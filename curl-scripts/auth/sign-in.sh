@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API="https://stark-falls-98169.herokuapp.com"
+API="http://localhost:4741/"
 URL_PATH="/sign-in"
 
 curl "${API}${URL_PATH}" \
