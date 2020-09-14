@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl "http://localhost:4741/businesses" \
+curl "https://stark-falls-98169.herokuapp.com/businesses" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
