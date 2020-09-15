@@ -1,4 +1,4 @@
-curl "http://localhost:4741/uploads" \
+curl "https://stark-falls-98169.herokuapp.com/uploads" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl "http://localhost:4741/businesses/${ID}" \
+curl "https://tranquil-crag-61634.herokuapp.com/businesses/${ID}" \
   --include \
   --request DELETE \
   --header "Authorization: Bearer ${TOKEN}"

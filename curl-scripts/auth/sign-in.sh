@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API="http://localhost:4741/"
+API="https://tranquil-crag-61634.herokuapp.com"
 URL_PATH="/sign-in"
 
 curl "${API}${URL_PATH}" \
