@@ -9,12 +9,11 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const s3Upload = require('../../lib/s3_upload')
 
 router.post('/uploads', requireToken, upload.single('upload'), (req, res, next) => {
-  req.body.upload.owner = req.user.id
   console.log(req.file)
   s3Upload(req.file)
     .then(awsFile => {
       console.log(awsFile)
-      return Upload.create({ url: awsFile.Location })
+      return Upload.create({ owner: req.user.id, url: awsFile.Location })
     })
     .then(uploadDoc => {
       res.status(201).json({ upload: uploadDoc })
